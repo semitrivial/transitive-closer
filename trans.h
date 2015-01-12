@@ -77,6 +77,7 @@ void free_ancestry_data( trie *t );
 void compute_transitive_closure_recursive( trie *t );
 void write_transitive_closure_recursive( FILE *fp, trie *t );
 void write_trie_of_full_relns( FILE *fp, trie *t );
+int already_has_ancestor( trie *obj, trie *subj );
 
 /*
  * trie.c

@@ -257,6 +257,9 @@ void compute_transitive_closure_recursive( trie *t )
       reln *r_new;
       trie_wrap *w, *w_new;
 
+      if ( already_has_ancestor( r->obj, r->subj ) )
+        continue;
+
       for ( w = r->subj->first_ancestor; w; w = w->next )
       {
         CREATE( r_new, reln, 1 );
@@ -366,4 +369,15 @@ void write_trie_of_full_relns( FILE *fp, trie *t )
 
   free( t->label );
   free( t );
+}
+
+int already_has_ancestor( trie *obj, trie *subj )
+{
+  trie_wrap *w;
+
+  for ( w = obj->first_ancestor; w; w = w->next )
+    if ( w->t == subj )
+      return 1;
+
+  return 0;
 }
