@@ -132,7 +132,7 @@ void parse_triples_file( FILE *fp )
       whitespaceable = 0;
     }
 
-    if ( c == ' ' || c == '\t' )
+    if ( c == ' ' || c == '\t' || ( c == '.' && fPred ) )
     {
       whitespaceable = 1;
 
@@ -145,7 +145,7 @@ void parse_triples_file( FILE *fp )
       }
       else if ( !fObj )
       {
-        int fPeriod = 0;
+        int fPeriod = (c=='.');
 
         set_iri( &obj, &fObj, buf, bptr );
 
